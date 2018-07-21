@@ -6,5 +6,4 @@ In this course, you will learn how to quickly spin up a reproducible development
 
 See https://testdriven.io/ for more information.
 
-[![Build Status](https://travis-ci.org/danielcgithub/animated-fortnight.svg?bran
-ch=master)](https://travis-ci.org/danielcgithub/animated-fortnight)
+[![Build Status](https://travis-ci.org/danielcgithub/animated-fortnight.svg?branch=master)](https://travis-ci.org/danielcgithub/animated-fortnight)

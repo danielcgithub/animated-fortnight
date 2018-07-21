@@ -4,10 +4,11 @@ services:
         container_name: users
         build:
           context: ./services/users
-          dockerfile: Dockerfile-dev
-        ports:
-            - '5001:5000'
+          dockerfile: Dockerfile-prod
+        expose:
+            - 5000
         environment:
+            - FLASK_ENV=production
             - FLASK_DEBUG=1
             - APP_SETTINGS=project.config.ProductionConfig
             - DATABASE_URL=postgres://postgres:postgres@users-db:5432/users_prod
@@ -20,10 +21,20 @@ services:
     users-db:
       container_name: users-db
       build:
-        context: ./services/users
-        dockerfile: Dockerfile-prod
-      ports:
-        - 5435:5432
+        context: ./services/users/project/db
+        dockerfile: Dockerfile
+      expose:
+        - 5432
       environment:
         - POSTGRES_USER=postgres
         - POSTGRES_PASSWORD=postgres
+
+    nginx:
+      build:
+        context: ./services/nginx
+        dockerfile: Dockerfile-prod
+      restart: always
+      ports:
+        - 80:80
+      depends_on:
+        - users
